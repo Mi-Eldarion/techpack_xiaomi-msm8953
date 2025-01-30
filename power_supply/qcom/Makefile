@@ -1,0 +1,1 @@
+obj-$(CONFIG_QPNP_SMBCHARGER)	+= qpnp-smbcharger.o
