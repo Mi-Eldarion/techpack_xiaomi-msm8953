@@ -1,3 +1,12 @@
+config QPNP_FG
+	tristate "QPNP fuel gauge driver"
+	depends on MFD_SPMI_PMIC
+	help
+	  Say Y here to enable the Fuel Gauge driver. This adds support for
+	  battery fuel gauging and state of charge of battery connected to the
+	  fuel gauge. The state of charge is reported through a BMS power
+	  supply property and also sends uevents when the capacity is updated.
+
 config QPNP_SMBCHARGER
 	tristate "QPNP SMB Charger driver"
 	depends on MFD_SPMI_PMIC
