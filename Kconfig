@@ -1,3 +1,4 @@
 if MACH_XIAOMI_MSM8953
 source "techpack/xiaomi-msm8953/touchscreen/Kconfig"
+source "techpack/xiaomi-msm8953/power_supply/Kconfig"
 endif # MACH_XIAOMI_MSM8953
