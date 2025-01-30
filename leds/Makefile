@@ -1,1 +1,1 @@
-obj-$(CONFIG_LEDS_AW2023)		+= leds-aw2023.o
+obj-$(CONFIG_LEDS_AW2023_MI8953)		+= leds-aw2023-mi8953.o

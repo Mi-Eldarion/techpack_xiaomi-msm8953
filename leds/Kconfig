@@ -1,4 +1,4 @@
-config LEDS_AW2023
+config LEDS_AW2023_MI8953
 	tristate "LED support for AW2023"
 	depends on LEDS_CLASS && I2C
 	help
