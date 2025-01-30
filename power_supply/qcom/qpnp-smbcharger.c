@@ -7190,7 +7190,7 @@ static int smbchg_hw_init(struct smbchg_chip *chip)
 
 static const struct of_device_id smbchg_match_table[] = {
 	{
-		.compatible     = "qcom,qpnp-smbcharger",
+		.compatible     = "qcom,qpnp-smbcharger-mi8953",
 	},
 	{ },
 };
@@ -8489,7 +8489,7 @@ MODULE_DEVICE_TABLE(spmi, smbchg_id);
 
 static struct platform_driver smbchg_driver = {
 	.driver		= {
-		.name		= "qpnp-smbcharger",
+		.name		= "qpnp-smbcharger-mi8953",
 		.owner		= THIS_MODULE,
 		.of_match_table	= smbchg_match_table,
 		.pm		= &smbchg_pm_ops,
