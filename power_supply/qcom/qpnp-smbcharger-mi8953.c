@@ -115,6 +115,10 @@ struct smbchg_chip {
 	u8				revision[4];
 
 	/* configuration parameters */
+
+#ifdef CONFIG_MACH_XIAOMI_YSL
+	int				cool_xiaomi;
+#endif
 	int				iterm_ma;
 	int				usb_max_current_ma;
 	int				typec_current_ma;
@@ -199,6 +203,9 @@ struct smbchg_chip {
 	bool				batt_cold;
 	bool				batt_warm;
 	bool				batt_cool;
+#ifdef CONFIG_MACH_XIAOMI_YSL
+	bool				batt_cool_xiaomi;
+#endif
 	unsigned int			thermal_levels;
 	unsigned int			therm_lvl_sel;
 	unsigned int			*thermal_mitigation;
@@ -1114,6 +1121,10 @@ static int get_prop_batt_health(struct smbchg_chip *chip)
 		return POWER_SUPPLY_HEALTH_WARM;
 	else if (chip->batt_cool)
 		return POWER_SUPPLY_HEALTH_COOL;
+#ifdef CONFIG_MACH_XIAOMI_YSL
+	else if (chip->batt_cool_xiaomi)
+		return POWER_SUPPLY_HEALTH_COOL_XIAOMI;
+#endif
 	else
 		return POWER_SUPPLY_HEALTH_GOOD;
 }
@@ -5809,7 +5820,7 @@ static int smbchg_battery_get_property(struct power_supply *psy,
 		val->intval = get_prop_batt_health(chip);
 		break;
 	case POWER_SUPPLY_PROP_TECHNOLOGY:
-		val->intval = POWER_SUPPLY_TECHNOLOGY_LION;
+		val->intval = POWER_SUPPLY_TECHNOLOGY_LIPO;
 		break;
 	case POWER_SUPPLY_PROP_FLASH_CURRENT_MAX:
 		val->intval = smbchg_calc_max_flash_current(chip);
@@ -7957,6 +7968,11 @@ static int smbchg_probe(struct platform_device *pdev)
 	chip->typec_psy = typec_psy;
 	chip->fake_battery_soc = -EINVAL;
 	chip->usb_online = -EINVAL;
+#ifdef CONFIG_MACH_XIAOMI_YSL
+	chip->batt_cool_xiaomi = false;
+	chip->batt_warm = false;
+	chip->batt_cool = false;
+#endif
 	dev_set_drvdata(&pdev->dev, chip);
 
 	spin_lock_init(&chip->sec_access_lock);
@@ -7973,6 +7989,8 @@ static int smbchg_probe(struct platform_device *pdev)
 		dev_err(chip->dev, "Error parsing DT peripherals: %d\n", rc);
 		goto votables_cleanup;
 	}
+
+	chip->hvdcp_not_supported = true;
 
 	rc = smbchg_check_chg_version(chip);
 	if (rc) {
