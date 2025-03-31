@@ -1,0 +1,8 @@
+config INPUT_QTI_HAPTICS
+ 	tristate "Haptics support for QTI PMIC"
+ 	depends on MFD_SPMI_PMIC
+ 	help
+ 	  This option enables device driver support for the haptics peripheral
+ 	  found on Qualcomm Technologies, Inc. PMICs.  The haptics peripheral
+ 	  is capable of driving both LRA and ERM vibrators.  This module provides
+ 	  haptic feedback for user actions such as a long press on the touch screen.
