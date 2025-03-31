@@ -3583,7 +3583,7 @@ static void __exit fts_ts_spi_exit(void)
 	spi_unregister_driver(&fts_ts_spi_driver);
 }
 
-int xiaomi_msm8953_touchscreen_fts_ts_init(void)
+static int __init fts_ts_init(void)
 {
 	int ret = 0;
 
@@ -3604,6 +3604,7 @@ static void __exit fts_ts_exit(void)
 	fts_ts_spi_exit();
 }
 
+module_init(fts_ts_init);
 module_exit(fts_ts_exit);
 
 MODULE_AUTHOR("FocalTech Driver Team");
