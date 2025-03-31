@@ -1,4 +1,4 @@
-config INPUT_QTI_HAPTICS
+config INPUT_QTI_HAPTICS_MI8953
  	tristate "Haptics support for QTI PMIC"
  	depends on MFD_SPMI_PMIC
  	help

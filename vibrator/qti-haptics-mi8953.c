@@ -2066,13 +2066,14 @@ static void qti_haptics_shutdown(struct platform_device *pdev)
 static const struct of_device_id haptics_match_table[] = {
 	{ .compatible = "qcom,haptics" },
 	{ .compatible = "qcom,pm660-haptics" },
+	{ .compatible = "qcom,pm8953-haptics" },
 	{ .compatible = "qcom,pm8150b-haptics" },
 	{},
 };
 
 static struct platform_driver qti_haptics_driver = {
 	.driver		= {
-		.name = "qcom,haptics",
+		.name = "qcom,haptics-pm8953",
 		.of_match_table = haptics_match_table,
 	},
 	.probe		= qti_haptics_probe,
