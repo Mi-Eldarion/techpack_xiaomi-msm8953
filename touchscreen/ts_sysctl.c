@@ -8,7 +8,7 @@
 
 struct xiaomi_msm8953_touchscreen_operations_t *xiaomi_msm8953_touchscreen_operations;
 
-static bool use_software_dt2w = false;
+static bool use_software_dt2w = true;
 static int xiaomi_msm8953_touchscreen_enable_dt2w_val = -1;
 static int xiaomi_msm8953_touchscreen_disable_keys_val = -1;
 
@@ -155,6 +155,7 @@ static struct ctl_table_header *xiaomi_msm8953_touchscreen_sysctl_header;
 
 static int __init xiaomi_msm8953_touchscreen_sysctl_init(void)
 {
+	use_software_dt2w = true;
 
 	xiaomi_msm8953_touchscreen_sysctl_header = register_sysctl_table(xiaomi_msm8953_touchscreen_root_dir);
 	if (!xiaomi_msm8953_touchscreen_sysctl_header)
